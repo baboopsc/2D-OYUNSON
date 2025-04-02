@@ -3,121 +3,121 @@ import random
 
 class Asteroid:
     '''
-    A class used to represent an asteroid
+    Bir asteroid sınıfını temsil etmek için kullanılan bir sınıf
     
     Attributes
     ----------
-    __Points: list of int
-        stores the 3 possible point values of the asteroid
+    __Points: int listesi
+        asteroidin 3 olası puan değerlerini tutar
         
-    __Hitpoints: list of int
-        stores the 3 possible health values of the asteroids
+    __Hitpoints: int listesi
+        asteroidlerin 3 olası sağlık değerlerini tutar
         
-    __Canvas: tkinter module
-        the window in which this bullet will be located
+    __Canvas: tkinter modülü
+        bu mermi'nin yer alacağı pencere
         
     __height_restriction: int
-        the minimum y value
+        minimum y değeri
         
-    __Asteroid: 2D list of int
-        a 2d  list to hold the stats of the asteroid
+    __Asteroid: 2D int listesi
+        asteroidin istatistiklerini tutacak bir 2D liste
         
     __yPos: int
-        the yposition of the asteroid
+        asteroidin y pozisyonu
         
     __xPos: int
-        the x position of the asteroid
+        asteroidin x pozisyonu
         
     __destroyed: boolean
-        the state of the asteroid
+        asteroidin durumu
         
     __timerId: none
-        the timer
-    
+        zamanlayıcı
+        
     __asteroidspeed: int
-        the base speed of the asteroid 
+        asteroidin temel hızı 
         
     methods
     -------
     SpawnAsteroid(self):
-        make the image of the asteroid visible
+        asteroidin resmini görünür yapar
         
     getSpeed(self):
-        get the current speed of the asteroid
+        asteroidin mevcut hızını alır
         
     setSpeed(self, speed):
-        set the new speed of the asteroid
+        asteroidin yeni hızını ayarlar
         
     moveAsteroid(self):
-         move the asteroid to the left
+        asteroidin sola hareket etmesini sağlar
          
     genYSpawn(self, y1 = 0 , y2 = 0, x1 = 0, x2 = 0):
-        generate the spawn location of the asteroid
+        asteroidin doğma konumunu oluşturur
         
     Generate(self):
-        generate the stats of the asteroid
+        asteroidin istatistiklerini oluşturur
         
     getyPos(self):    
-        gets the current y position
+        mevcut y pozisyonunu alır
         
     setyPos(self, y):
-        sets the new y position
+        yeni y pozisyonunu ayarlar
         
     getxPos(self):
-        gets the current x position
+        mevcut x pozisyonunu alır
         
     setxPos(self, x):
-        sets the new x position
+        yeni x pozisyonunu ayarlar
         
     setAsteroidimg(self, size):
-        sets the image of the asteroid
+        asteroidin resmini ayarlar
         
     getAstroidimg(self):
-        gets the current image of the asteroid
+        asteroidin mevcut resmini alır
         
     setAsteroidhp(self, size):
-        sets the Asteroids health
+        asteroidin sağlığını ayarlar
         
     getAsteroidhp(self):
-        gets the current hp of the asteroid
+        asteroidin mevcut sağlığını alır
         
     setAsteroidpoints(self,size):
-        sets the points the asteroid is worth
+        asteroidin değerini ayarlar
         
     getAsteroidpoints(self):
-        gets the points value of the asteroid
+        asteroidin puan değerini alır
         
     getWidth(self):
-        gets the width of the asteroid
+        asteroidin genişliğini alır
         
     getHeight(self):
-        gets the height of the asteroid
+        asteroidin yüksekliğini alır
         
     destroy(self):
-        sets the state of the asteroid to True
+        asteroidin durumunu True yapar
         
     isdestroyed(self):
-        returns the state of the asteroid
+        asteroidin durumunu döndürür
         
     undestroy(self):
-        sets the state of the asteroid to False
+        asteroidin durumunu False yapar
         
     makeinvis(self, setback = 0):
-        moves the asteroid off screen
+        asteroidin ekranın dışına hareket etmesini sağlar
         
     TakeDamage(self):
-        removes 1 health from the asteroid and determines if it should be destroyed
+        asteroidin sağlığından 1 azaltır ve yok olup olmayacağını belirler
     
     '''
     
     def __init__(self, canvasarg, height_restriction):
         '''
-        PARAMETERS:
-        -----------
-        canvas : tkinter module
-            the window in which this bullet will be located
+        PARAMETRELER:
+        -------------
+        canvas : tkinter modülü
+            bu merminin yer alacağı pencere
         height_restriction: int
-            the minimum y value
+            minimum y değeri
         
         '''
         
@@ -136,34 +136,34 @@ class Asteroid:
        
     def SpawnAsteroid(self):
         '''
-        make the image of the asteroid visible
+        asteroidin resmini görünür yapar
         '''
         self.__asteroidimg = self.__Canvas.create_image(self.__Canvas.winfo_reqwidth(), self.__Canvas.winfo_reqheight() // 2, anchor = "nw",  image = self.getAstroidimg())    
             
     def getSpeed(self):
         '''
-        Returns the speed of the asteroid.
-        RETURNS:
+        asteroidin hızını döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The value of the asteroids speed
+            asteroidin hız değeri
         '''
         return self.__asteroidspeed
     
     def setSpeed(self, speed):
         '''
-        Sets the speed of the asteroid
-        PARAMETERS:
-        -----------
+        asteroidin hızını ayarlar
+        PARAMETRELER:
+        -------------
         speed: int
-            The new speed of the asteroid
+            asteroidin yeni hızı
         
         '''
         self.__asteroidspeed = speed
         
     def moveAsteroid(self):
         '''
-        move the asteroid to the left, 5 pixels every ___ms (the time it takes varies on the value that the coder inputs, set to 20 by default)
+        asteroidin sola hareket etmesini sağlar, her ___ms de 5 piksel sola hareket eder (zamanlama, kodlayıcının girdiği değere göre değişir, varsayılan olarak 20)
         '''
         
         self.__xPos -= 5
@@ -174,25 +174,24 @@ class Asteroid:
     
     def genYSpawn(self, y1 = 0 , y2 = 0, x1 = 0, x2 = 0):
         '''
-        
-        Sets the hitbox that the asteroid cannot spawn in asteroid
-        generates a spawnable location and returns it
-        PARAMETERS:
-        -----------
+        asteroidin doğamayacağı bölgeyi belirler
+        geçerli bir konum üretir ve döndürür
+        PARAMETRELER:
+        -------------
         y1: int
-            The top
+            Üst
         y2: int
-            The bot
+            Alt
         x1: int
-            The left
+            Sol
         x2: int
-            The right
+            Sağ
         
-        Returns the y value the asteroid will spawn at
-        RETURNS:
+        asteroidin doğacağı y değeri döndürülür
+        DÖNDÜRÜR:
         --------
         int
-            The y value the asteroid will spawn at in pixels
+            asteroidin doğacağı y değeri piksel olarak
         '''
         width = self.getWidth()
         Yspawn = 0
@@ -205,15 +204,13 @@ class Asteroid:
             if self.getxPos() + self.getWidth() >= x1 and self.getxPos() <= x1 + x2:
                 if Ybottom >= y1 and Yspawn <= y1 + y2:
                     Yspawn = 0
-                
-            
-            
+                  
         self.setyPos(Yspawn) 
         return Yspawn
         
     def Generate(self):
         '''
-        randomizes the size and generates the stats of the asteroid accordingly
+        boyutu rastgele seçer ve asteroidin istatistiklerini buna göre oluşturur
         '''
         
         size = random.randint(0,2)
@@ -228,21 +225,21 @@ class Asteroid:
     #------------------------------------------------------- 
     def getyPos(self):
         '''
-        Returns the y value of the asteroid.
-        RETURNS:
+        asteroidin y değerini döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The y value of the asteroid 
+            asteroidin y değeri
         '''
         return self.__yPos
     
     def setyPos(self, y):
         '''
-        Sets the y value of the asteroid
-        PARAMETERS:
-        -----------
+        asteroidin y değerini ayarlar
+        PARAMETRELER:
+        -------------
         y: int
-            The new y value of the asteroid
+            asteroidin yeni y değeri
         
         '''
         self.__yPos = y
@@ -250,136 +247,135 @@ class Asteroid:
     #------------------------------------------------------- 
     def getxPos(self):
         '''
-        Returns the x value of the asteroid.
-        RETURNS:
+        asteroidin x değerini döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The x value of the asteroid 
+            asteroidin x değeri
         '''
         return self.__xPos
     
     def setxPos(self, x):
         '''
-        Sets the x value of the asteroid
-        PARAMETERS:
-        -----------
+        asteroidin x değerini ayarlar
+        PARAMETRELER:
+        -------------
         x: int
-            The new x value of the asteroid
+            asteroidin yeni x değeri
         
         '''
         self.__xPos = x
-            
+             
     #------------------------------------------------------- 
     def setAsteroidimg(self, size):
         self.__Asteroid[0][0] = self.__imgAsteroid[size]
         
     def getAstroidimg(self):
         '''
-        Returns the image of the asteroid.
-        RETURNS:
+        asteroidin resmini döndürür.
+        DÖNDÜRÜR:
         --------
         photoimage
-            The image of the asteroid 
+            asteroidin resmi
         '''
         return self.__Asteroid[0][0]
     #------------------------------------------------------- 
     
     def setAsteroidhp(self, size):
         '''
-        Sets the health of the asteroid
-        PARAMETERS:
-        -----------
+        asteroidin sağlığını ayarlar
+        PARAMETRELER:
+        -------------
         size: int
-            The new health of the asteroid
+            asteroidin yeni sağlığı
         
         '''
         self.__Asteroid[0][1] = self.__Hitpoints[size]
         
     def getAsteroidhp(self):
         '''
-        Returns the health of the asteroid.
-        RETURNS:
+        asteroidin sağlığını döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The health of the asteroid
+            asteroidin sağlığı
         '''
         return self.__Asteroid[0][1]
     #------------------------------------------------------- 
       
     def setAsteroidpoints(self,size):
         '''
-        Sets the points of the asteroid
-        PARAMETERS:
-        -----------
+        asteroidin puanını ayarlar
+        PARAMETRELER:
+        -------------
         size: int
-            The new points of the asteroid
+            asteroidin yeni puanı
         
         '''
         self.__Asteroid[0][2] = self.__Points[size]
         
     def getAsteroidpoints(self):
         '''
-        Returns the points of the asteroid.
-        RETURNS:
+        asteroidin puanını döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The points of the asteroid
+            asteroidin puanı
         '''
         return self.__Asteroid[0][2]
     #------------------------------------------------------- 
     def getWidth(self):
         '''
-        Returns the width of the asteroid.
-        RETURNS:
+        asteroidin genişliğini döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The width of the asteroids in pixels
+            asteroidin genişliği piksel olarak
         '''
         img = self.getAstroidimg()
         return img.width()
     
     def getHeight(self):
         '''
-        Returns the height of the asteroid.
-        RETURNS:
+        asteroidin yüksekliğini döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The height of the asteroids in pixels
+            asteroidin yüksekliği piksel olarak
         '''
         img = self.getAstroidimg()
         return img.height()
     #-------------------------------------------------------
     def destroy(self):
         '''
-        destroy(self):
-        sets the state of the asteroid to True
+        asteroidin durumunu True yapar
         '''
         self.__destroyed = True
         
     def isdestroyed(self):
         '''
-        Returns the state of the asteroid.
-        RETURNS:
+        asteroidin durumunu döndürür.
+        DÖNDÜRÜR:
         --------
         bool
-            The state of the asteroid
+            asteroidin durumu
         '''
         return self.__destroyed
     
     def undestroy(self):
         '''
-        sets the state of the asteroid to False
+        asteroidin durumunu False yapar
         '''
         self.__destroyed = False
         
     def makeinvis(self, setback = 0):
         '''
-        stops moving the asteroid
-        and places it beyond the right side of the window
-        PARAMETERS:
-        -----------
+        asteroidin hareketini durdurur
+        ve sağdaki ekranın dışına yerleştirir
+        PARAMETRELER:
+        -------------
         setback: int
-            The setback of the asteroids x postion
+            asteroidin x pozisyonundaki geri çekilme miktarı
         
         '''
         try:
@@ -394,12 +390,12 @@ class Asteroid:
         
     def TakeDamage(self):
         '''
-        removes 1 health from the asteroid and determines if it should be destroyed. 
-        if destroyed returns the points of the asteroid.
-        RETURNS:
+        asteroidin sağlığından 1 azaltır ve yok olup olmayacağını belirler. 
+        yok olduysa, asteroidin puanını döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The points of the asteroid
+            asteroidin puanı
         '''
         hp = self.getAsteroidhp()
         hp-=1
@@ -417,7 +413,3 @@ class Asteroid:
             
             self.setyPos(self.__yPos + self.__imgAsteroid[hp].height()//4)
             self.__Canvas.coords(self.__asteroidimg, self.__xPos, self.getyPos())
- 
-    
-    
-    
