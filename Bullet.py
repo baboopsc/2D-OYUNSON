@@ -1,56 +1,57 @@
 from tkinter import PhotoImage
 
 class Bullet:
-    '''
-    A class used to represent a bullet
-    
-    Attributes
+   '''
+    Bir mermiyi temsil etmek için kullanılan bir sınıf
+
+    Özellikler
     ----------
     __x:int
-        the x value of the bullet
+        merminin x değeri
     __y:int
-        the y value of the bullet
+        merminin y değeri
     __width:int
-        the width of the bullet
+        merminin genişliği
     __height:int
-        the height of the bullet
+        merminin yüksekliği
     __fired:boolean
-        is bullet fired
+        mermi ateşlendi mi
     __timerid:none
-        the timer
-    __canvas : tkinter module
-        the window in which this bullet will be located
-        
-    Methods
+        zamanlayıcı
+    __canvas : tkinter modülü
+        bu merminin yer alacağı pencere
+
+    Yöntemler
     -------
     getX(self):
-        gets the current x value
+        mevcut x değerini alır
     getY(self):
-        gets the current y value
+        mevcut y değerini alır
     setX(self, x):
-        set the new x value
+        yeni x değerini ayarlar
     setY(self, y):
-        sets the new y value
+        yeni y değerini ayarlar
     setLocation(self, x, y):
-        sets the location of the bullet, on the x and y axis
+        merminin yerini x ve y eksenlerinde ayarlar
     fireBullet(self):
-        fires the bullet, and moves it forwards
+        mermiyi ateşler ve ileriye hareket ettirir
     isFired(self):
-        returns whether the bullet is fired or not
+        merminin ateşlenip ateşlenmediğini döndürür
     reset(self):
-        stops the bullet from moving, by stopping the timer
+        merminin hareketini durdurur, zamanlayıcıyı durdurarak
     getWidth(self):
-        get the width of the bullet in pixels
+        merminin genişliğini piksel cinsinden alır
     getHeight(self):
-        get the height of the bullet in pixels
-    '''
+        merminin yüksekliğini piksel cinsinden alır
+'''
+
     def __init__(self, canvasarg):
-        '''
-        PARAMETERS:
+       '''
+        PARAMETRELER:
         -----------
-        canvas : tkinter module
-            the window in which this bullet will be located
-        '''
+        canvas : tkinter modülü
+            bu merminin yer alacağı pencere
+'''
         self.__canvas = canvasarg
         self.__x = 0
         self.__y = 0
@@ -66,63 +67,35 @@ class Bullet:
         self.__imgBullet = self.__canvas.create_image(self.__x - self.__img_bullet.width(), self.__y - self.__img_bullet.height(), image = self.__img_bullet, anchor='nw')
     
     def getX(self):
-        '''
-        Returns the x value of the bullet.
-        RETURNS:
+      '''
+        Merminin x değerini döndürür.
+        DÖNDÜRÜR:
         --------
         int
-            The x value of the bullet
-        '''
+            Merminin x değeri
+'''
         return self.__x
     
     def getY(self):
-        '''
-        Returns the y value of the bullet.
-        RETURNS:
-        --------
-        int
-            The y value of the bullet
-        '''
+        
         return self.__y
     
     def setX(self, x):
-        '''
-        Sets the x value of the bullet
-        PARAMETERS:
-        -----------
-        x: int
-            The new x value of the bullet
-        '''
+       
         self.__x = x
     
     def setY(self, y):
-        '''
-        Sets the y value of the bullet
-        PARAMETERS:
-        -----------
-        y: int
-            The new y value of the bullet
-        '''
+      
         self.__y = y
     
     def setLocation(self, x, y):
-        '''
-        Sets the x & y values of the bullet
-        PARAMETERS:
-        -----------
-        x: int
-            The new x value of the bullet
-        y:int
-            the new y value of the bullet
-        '''
+       
         self.__x = x
         self.__y = y
         self.__canvas.coords(self.__imgBullet, self.__x, self.__y)
     
     def fireBullet(self):
-        '''
-        fires the bullet and moves it forward 5 pixels every 5ms
-        '''
+       
         self.__fired = True
         self.__x += 5
         self.__canvas.itemconfig(self.__imgBullet, image = self.__img_bullet)
@@ -130,19 +103,10 @@ class Bullet:
         self.__timerid = self.__canvas.after(5, self.fireBullet)
     
     def isFired(self):
-        '''
-        Returns if the bullet is fired
-        RETURNS:
-        --------
-        boolean
-            The state of the bullet
-        '''
+       
         return self.__fired
     
     def reset(self):
-        '''
-        stops the bullet from moving, by stopping the timer
-        '''
         self.__canvas.itemconfig(self.__imgBullet, image = self.__imgBlank)
         try:
             self.__timerid = self.__canvas.after_cancel(self.__timerid)
@@ -151,55 +115,42 @@ class Bullet:
             pass
     
     def getWidth(self):
-        '''
-        Returns the width of the bullet.
-        RETURNS:
-        --------
-        int
-            The  width of the bullet in pixels
-        '''
+        
         return self.__width
     
     def getHeight(self):
-        '''
-        Returns the height of the bullet.
-        RETURNS:
-        --------
-        int
-            The height of the bullet in pixels
-        '''
         return self.__height
     
     
     
     
     
-    '''
-        for x in range(alltxt.count("'")):
+   '''
+        alltxt.count("'") kadar döngü çalıştır:
             
-            if counter % 2 == 0:
+            Eğer sayaç % 2 == 0 ise:
                 pos = self.text.search("'", pos, "end")
                 pos = "{} + {} chars".format(pos,1)
                 
-                if flag == False and x == alltxt.count("'") -1:
+                Eğer flag False ise ve x, alltxt.count("'") - 1'e eşitse:
                     pos_end = self.text.search("'", pos, "end")
                     pos_end = "{} + {} chars".format(pos_end,1)
                     pos = "{} - {} chars".format(pos,1)
                     self.text.tag_add(tag,pos,pos_end)
                     flag = True
                 
-            else:
+            Aksi takdirde:
                 pos_end = self.text.search("'", pos, "end")
                 print(pos_end)
-                if self.text.compare(self.text.search("'", pos, "end"), '>' , self.text.search('\n', pos, 'end')) == True:
+                Eğer self.text.compare(self.text.search("'", pos, "end"), '>' , self.text.search('\n', pos, 'end')) == True:
                     pos = pos_end
                     flag = False
                     
-                else:
+                Aksi takdirde:
                     pos_end = "{} + {} chars".format(pos_end,1)
                     pos = "{} - {} chars".format(pos,1)
                     self.text.tag_add(tag,pos,pos_end)
                       
                 pos = "{}".format(pos_end)
-            counter += 1   
-            '''
+            sayaç += 1   
+'''
