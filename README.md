@@ -123,8 +123,9 @@ asteroid.Generate()
 asteroid.SpawnAsteroid()
 asteroid.moveAsteroid()
 
-root.mainloop()
-# Asterpocalypse - Bullet Sınıfı Raporu
+root.mainloop() 
+f)`
+   - Mermiyi ateşler ve # Asterpocalypse - Bullet Sınıfı Raporu
 
 ## Genel Bakış
 
@@ -220,3 +221,4 @@ bullet = Bullet(canvas)
 bullet.fireBullet()
 
 root.mainloop()
+
