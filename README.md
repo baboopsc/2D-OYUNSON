@@ -220,4 +220,116 @@ Mermi nesnesi oluşturulur. Görseller yüklenir, başlangıç konumu atanır ve
 
 ### `getX()` / `getY()`
 Merminin güncel koordinatlarını döndürür.
+# `Player.py` - Oyuncu Gemisi Sınıfı
+
+Bu sınıf, oyuncunun uzay gemisini temsil eder. Gemi hareket eder, can alır/kaybeder, animasyon oynatır ve mermi isabetinde tepki verir. Tkinter kullanılarak canvas üzerine çizilir.
+
+---
+
+## 📷 Temsili Görseller
+
+### Gemi Görselleri
+
+| Durum | Görsel |
+|------|--------|
+| Normal | ![spaceship](images/spaceship.png) |
+| Alternatif 1 | ![spaceship2](images/spaceship2.png) |
+| Alternatif 2 | ![spaceship3](images/spaceship3.png) |
+| Ateş Anı | ![spaceship4](images/spaceship4.png) |
+| Patlama | ![exploded_ship](images/exploded_ship.png) |
+
+### Can (Lives) Görselleri
+
+| Can Durumu | Görsel |
+|------------|--------|
+| 1 Can | ![lives1](images/lives1.png) |
+| 2 Can | ![lives2](images/lives2.png) |
+| 3 Can | ![lives3](images/lives3.png) |
+
+### Sağlık (Health) Görselleri
+
+> 0'dan 10'a kadar 11 farklı sağlık görseli vardır. Aşağıda birkaç örnek verilmiştir:
+
+| Sağlık | Görsel |
+|--------|--------|
+| 0 | ![health0](images/health0.png) |
+| 5 | ![health5](images/health5.png) |
+| 10 | ![health10](images/health10.png) |
+
+---
+
+##  Nitelikler
+
+| Özellik | Açıklama |
+|--------|----------|
+| `__xPos`, `__yPos` | Geminin konumu |
+| `__PlayerHealth` | Sağlık değeri (varsayılan 10) |
+| `__Lives` | Can sayısı (varsayılan 3) |
+| `__imgPlayer` | Geminin animasyon kareleri |
+| `__Healthimg`, `__Lives_img` | UI sağlık ve can göstergesi görselleri |
+| `__canvas` | Oyunun çizildiği pencere |
+
+---
+
+##  Metotlar
+
+### `__init__(canvasarg, x=0, y=0)`
+Oyuncu gemisini başlatır ve başlangıç değerlerini ayarlar.
+
+---
+
+### `animate(full)`
+Gemiye animasyon efekti verir.
+
+- `full=False`: Normal durum animasyonu  
+- `full=True`: Ateş etme sırasında farklı animasyon
+
+---
+
+### `setLocation(x, y)`
+Gemi konumunu verilen koordinatlara taşır.
+
+---
+
+### `getHealth()` / `setHealth(health)`
+Sağlık değerini döndürür veya ayarlar.
+
+---
+
+### `getLives()` / `setLives(lives)`
+Can sayısını döndürür veya ayarlar.
+
+---
+
+### `getWidth()` / `getHeight()`
+Geminin piksel cinsinden boyutlarını verir.
+
+---
+
+### `resethealth()`
+Sağlık değerini maksimum olan 10’a sıfırlar ve arayüzdeki görseli günceller.
+
+---
+
+### `takeDamage()`
+Sağlıktan 1 düşürür. Eğer sağlık 0 olursa can kaybedilir. Can biterse patlama görseli gösterilir.
+
+---
+
+### `getX()` / `getY()`
+Mevcut konumu döndürür.
+
+---
+
+### `reset()`
+Oyuncu istatistiklerini sıfırlar (sağlık, can, görsel).
+
+---
+
+### `resetlocation()`
+Gemi konumunu ekranın sol ortasına sıfırlar.
+
+---
+
+
 
