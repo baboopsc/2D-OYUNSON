@@ -128,7 +128,7 @@ root.mainloop()
 
 ## Genel Bakış
 
-**Bullet Sınıfı**, oyundaki mermileri temsil eder. Bu sınıf, merminin konumunu, ateşlenip ateşlenmediğini, hareketini ve resetlenmesini yönetir. Mermi, bir resim ile temsil edilir ve ekranda hareket ettirilir. Sınıf, merminin hareketinin kontrolü için bir zamanlayıcı (timer) kullanır.
+**Bullet Sınıfı**, oyundaki mermileri temsil eder. Bu sınıf, merminin hareketini, ateşlenmesini ve ekran üzerinde nasıl görüntüleneceğini kontrol eder. Mermi, bir oyuncu tarafından ateşlendiğinde ekranda hareket eder ve hedefe doğru ilerler.
 
 ---
 
@@ -136,21 +136,24 @@ root.mainloop()
 
 - **X ve Y Değerleri:**
     - Merminin ekran üzerindeki konumunu belirler. `__x` ve `__y` olarak saklanır.
-    
-    ![Bullet X ve Y](images/bullet_position_example.png)
+
+    ![Bullet Position](images/bullet_position_example.png)
 
 - **Görseller:**
-    - Merminin görseli **laserbeam_red.png** olarak belirlenmiştir.
-      ![Laser Beam](images/laserbeam_red.png)
-    - Boş bir görsel **blank.png** de reset işlemleri için kullanılır.
-      ![Blank](images/blank.png)
+    - Merminin görseli **laserbeam_red.png** olarak belirlenmiştir. Bu görsel, mermiyi temsil eder.
+    
+    ![Bullet Image](images/laserbeam_red.png)
+
+- **Boş Görsel:**
+    - Merminin boş durumda gösterilmesi için kullanılan görsel **blank.png** olarak belirlenmiştir.
+    
+    ![Blank Image](images/blank.png)
 
 - **Genel Durum:**
     - **__fired:** Merminin ateşlenip ateşlenmediğini kontrol eder.
-    - **__timerid:** Merminin hareketini yöneten zamanlayıcının kimliği.
     - **__canvas:** Merminin yer alacağı tkinter canvas penceresi.
 
-- **Mermi Boyutları:**
+- **Boyutlar:**
     - Merminin genişliği (`__width`) ve yüksekliği (`__height`), görselin boyutlarından alınır.
     
     ![Bullet Size](images/bullet_size_example.png)
@@ -172,22 +175,22 @@ root.mainloop()
    - Merminin y koordinatını ayarlar.
 
 ### 5. `setLocation(self, x, y)`
-   - Merminin konumunu hem x hem de y eksenlerinde ayarlar.
+   - Merminin ekran üzerindeki konumunu belirler ve `__canvas.coords()` fonksiyonu ile görseli günceller.
 
-    ![Set Location](images/set_location_example.png)
+    ![Bullet Location](images/bullet_location_example.png)
 
 ### 6. `fireBullet(self)`
-   - Mermiyi ateşler ve ileriye hareket ettirir. Hareket için bir zamanlayıcı kullanılır.
+   - Mermiyi ateşler ve ileriye hareket ettirir. Bu metod, mermiyi sürekli olarak sağa hareket ettirir.
 
-   ![Fire Bullet](images/fire_bullet_example.png)
+    ![Bullet Firing](images/bullet_firing_example.png)
 
 ### 7. `isFired(self)`
    - Merminin ateşlenip ateşlenmediğini kontrol eder ve Boolean (True/False) değerini döndürür.
 
 ### 8. `reset(self)`
-   - Merminin hareketini durdurur, görseli boş bir resimle değiştirir ve zamanlayıcıyı iptal eder.
+   - Merminin hareketini durdurur, zamanlayıcıyı iptal eder ve mermiyi boş bir görsel ile değiştirir.
 
-   ![Reset Bullet](images/reset_bullet_example.png)
+   ![Bullet Reset](images/bullet_reset_example.png)
 
 ### 9. `getWidth(self)`
    - Merminin genişliğini döndürür.
@@ -210,10 +213,10 @@ root = Tk()
 canvas = Canvas(root, width=800, height=600)
 canvas.pack()
 
-# Mermi objesi oluştur
+# Bullet objesi oluştur
 bullet = Bullet(canvas)
 
-# Mermiyi ateşle
+# Bullet ateşle
 bullet.fireBullet()
 
 root.mainloop()
