@@ -106,15 +106,15 @@ Aşağıdaki görseller `images` klasöründen alınmıştır:
 
 ## Örnek Kod
 
-# 🚀 Asterpocalypse - Bullet Sınıfı Raporu
+#  Asterpocalypse - Bullet Sınıfı Raporu
 
-## 🎯 Genel Bakış
+##  Genel Bakış
 
 **`Bullet` sınıfı**, oyuncu tarafından ateşlenen mermiyi temsil eder. Bu sınıf, merminin hareketini, görselliğini ve ekran üzerindeki davranışını kontrol eder.
 
 ---
 
-## 🧩 Temel Özellikler
+##  Temel Özellikler
 
 | Özellik         | Açıklama |
 |-----------------|----------|
@@ -126,7 +126,7 @@ Aşağıdaki görseller `images` klasöründen alınmıştır:
 
 ---
 
-## 🖼️ Kullanılan Görseller
+##  Kullanılan Görseller
 
 | Amaç                         | Görsel |
 |-----------------------------|--------|
@@ -135,7 +135,7 @@ Aşağıdaki görseller `images` klasöründen alınmıştır:
 
 ---
 
-## ⚙️ Metotlar ve Açıklamaları
+##  Metotlar ve Açıklamaları
 
 ### `__init__(self, canvasarg)`
 Mermi nesnesi oluşturulur. Görseller yüklenir, başlangıç konumu atanır ve mermi canvas'a yerleştirilir.
