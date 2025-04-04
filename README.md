@@ -1,3 +1,79 @@
+#  Asterpocalypse
+
+**Ali Muhsin Mışraklı & Okan Karahan**  
+📅 *01/04/2025*
+
+---
+
+##  Oyun Tanıtımı
+
+**Asterpocalypse**, oyuncunun bir uzay gemisini kontrol ederek ekrana doğru gelen asteroidleri yok etmeye çalıştığı 2D bir uzay oyunudur.  
+Pygame ve Tkinter kullanılarak Python diliyle geliştirilmiştir.
+
+---
+
+##  Ekran Görüntüleri
+
+### Ana Arayüz
+![Arka Plan ve Başlık](images/asterpocalypse.png)
+
+### Oynanış
+![Oyun Arka Planı](images/space_background.png)
+
+---
+
+##  Kullanılan Sınıflar ve Bileşenler
+
+###  `Player.py`
+Oyuncunun uzay gemisini temsil eder.  
+Can, sağlık, konum ve animasyonlarla ilgilenir.
+
+###  `Bullet.py`
+Oyuncunun ateşlediği lazer mermilerini kontrol eder.  
+Lazerin konumunu ve çarpışma kontrolünü yönetir.
+
+###  `Asteroid.py`
+Asteroidleri oluşturur, hareket ettirir ve çarpışma sonrası yok edilmesini sağlar.
+
+---
+
+##  Ses Efektleri
+
+- **Arka Plan Müziği:** `15 MilkyWay (Battle).mp3`  
+- **Lazer Atışı:** `064-laser.wav`  
+- **Patlama Efekti:** `explosion.wav`
+
+> Sesler, pygame'in mixer modülü kullanılarak yüklenir ve kontrol edilir.
+
+---
+
+##  Zamanlayıcılar
+
+- **Arka Plan Animasyonu:** 50ms
+- **Mermi Takibi:** 50ms
+- **Skor Güncelleme:** 50ms
+- **Çarpışma Kontrolü:** 1ms
+- **Asteroid Üretimi:** Başlangıçta 2000ms
+- **Oyuncu Animasyonu:** 125ms
+
+---
+
+## Yapay Zekâ / Zorluk Sistemi
+
+- Oyun ilerledikçe asteroid hızı artar (`asteroid_speed`)  
+- Yeni dalga başladığında kullanıcı bilgilendirilir  
+- Oyun zorluğu her yeni dalgada artar
+
+---
+
+##  Kontroller
+
+- **Fare Hareketi:** Uzay gemisini konumlandırır
+- **Space Tuşu:** Lazer ateşler
+
+---
+
+
 # Asterpocalypse - Asteroid Sınıfı Raporu
 
 ## Genel Bakış
@@ -144,6 +220,4 @@ Mermi nesnesi oluşturulur. Görseller yüklenir, başlangıç konumu atanır ve
 
 ### `getX()` / `getY()`
 Merminin güncel koordinatlarını döndürür.
-
-
 
