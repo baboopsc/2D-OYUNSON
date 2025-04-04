@@ -3,43 +3,43 @@
 #//Asterpocalypse Program
 #//01/04/2025
     
-#import all required classes
+# Gerekli tüm sınıfları içeri aktar
 from tkinter import Tk, Canvas, PhotoImage, messagebox
 from Bullet import Bullet
 from Player import Player
 from Asteroid import Asteroid
 import pygame
 
-#initialize mixer
+# Miksere başlat
 pygame.mixer.init()
 
-#load and play backgorund song on repeat
+# Arka plan şarkısını yükle ve tekrar çal
 pygame.mixer.music.load("15 MilkyWay (Battle).mp3")
 pygame.mixer.music.set_volume(.5)
 pygame.mixer.music.play(loops=-1)
 
-#create a function to play a sound effect
+# Bir ses efekti çalmak için bir fonksiyon oluştur
 def playlasereffect():
-    #initialize sound effect
+    #ses efektini başlat
     laser = pygame.mixer.Sound("064-laser.wav")
-    #play effect
+    #oynat efekti
     pygame.mixer.Sound.play(laser)
  
-#create a function to play a sound effect   
+# Bir ses efekti çalmak için bir fonksiyon oluştur
 def playexplosioneffect():
-    #initialize sound effect
+    #ses efektini başlat
     explode = pygame.mixer.Sound("explosion.wav")
-    #play effect
+    #oynat efekti
     pygame.mixer.Sound.play(explode)
 
-#create a function to pause and un-pause the timers
+# Zamanlayıcıyı duraklatmak ve tekrar başlatmak için bir fonksiyon oluştur
 def pausetimers(flag = True):
     global frametmrid
     global bullettmrid
     global collisionid
     global asterspawntmrid
     
-    #check if you want to pause or un-pause (true to pause, false to un-pause)
+    # Duraklatmak mı yoksa devam ettirmek mi istediğini kontrol et (duraklatmak için True, devam ettirmek için False)
     if flag == True:
         try:
             #pause these timers
@@ -50,42 +50,44 @@ def pausetimers(flag = True):
         except ValueError:
             pass
     else:
-        #un-pause these timers
+       # Bu zamanlayıcıları devam ettir (un-pause)
         frame()
         bulletTimer()
         Collisionchk()
         create_Asteroid()
 
-#create a timer that updates the score, every 50ms
+# Skoru her 50ms'de bir güncelleyen fonksiyon
 def scoretimer():
     global score
     global scoretmrid
     canvas.itemconfig(score_text, text = score)
     scoretmrid = root.after(50, scoretimer)
     
-#create a timer that updates the ship frame, every 125ms    
+# 125 ms'de bir gemi animasyonu çerçevesini (frame) güncelleyen bir zamanlayıcı fonksiyonu 
 def frame():
     global frametmrid
-    #check which animation to play and play it
+  
     P.animate(B.isFired())
     frametmrid = root.after(125, frame)
 
-#create a program to close the game
+# Oyunu kapatmak için bir program oluştur
 def exit_program():
-    #stop these timers
+   
     root.after_cancel(btid)
     root.after_cancel(scoretmrid)
-    #stop all other timers
+    
     pausetimers()
     
     exit()
 
-#create a program to reset the game
+# Oyunu sıfırlamak için bir program oluştur
+
 def reset(flag = True):
     global score
     global asteroid_spawn_rate
     global asteroid_speed
-    #reset the asteroids to the rightmost wall, and offset them
+    # Asteroitleri en sağ duvara sıfırla ve onları kaydır
+
     widthsetback = 0
     for x in range(len(asteroids)):
         asteroids[x].destroy()
@@ -95,66 +97,63 @@ def reset(flag = True):
     #reset the laser
     B.reset()
     
-    #hard reset the game, make speed the base speed, and reset score
+    # Oyunu tamamen sıfırla, hızı temel hıza ayarla ve skoru sıfırla
+
     if flag == True:
         asteroid_speed = 100
         asteroid_spawn_rate =2000
         score = 0
         canvas.itemconfig(score_text, text = score)
 
-#create a function to check whether a player loses a life or has a game over       
+# Bir oyuncunun bir can kaybedip kaybetmediğini veya oyunun bitip bitmediğini kontrol eden bir fonksiyon oluştur
+     
 def playerlives():
 
     global score
     
-    #check the total lives, if 0 ask if they want to play again
+    # Toplam canları kontrol et, eğer 0 ise tekrar oynamak isteyip istemediklerini sor
+
     if P.getLives() == 0:
-        #pause timers, reset player health/lives, soft reset the game
+       # Zamanlayıcıları duraklat, oyuncu sağlığını/canlarını sıfırla, oyunu yumuşak bir şekilde sıfırla
         pausetimers()
         P.reset()
         reset(False)
         flag = messagebox.askyesno("Asterpocalypse", "You had " + str(score) + " Points\nYou are out of lives would you like to play again?")
-        #hard reset the game
+       # Oyunu tamamen sıfırla
         reset()
-        #reset player location
+       # Oyuncu konumunu sıfırla
         P.resetlocation()
-        #if they choose no exit the program
+      
         if flag == False:
             exit_program()
-        #un-pause the timers
+       
         pausetimers(False)
             
             
     if P.getHealth() == 0:
-        #pause timers
         pausetimers()
-        #reset health  
         P.resethealth()
-        #soft reset game
         reset(False)
-        #output that they lost a life
         messagebox.showinfo("Asterpocalypse", "You lost a life")
-        #reset the player location
         P.resetlocation()
-        #un-pause the timers
-        pausetimers(False)
         
-        
+        pausetimers(False)    
     
-#create a function to check if an asteroid was destroyed, and if yes add the points it was worth to the total points     
+# Bir asteroit yok olduysa kontrol eden bir fonksiyon oluştur ve eğer evet ise, değeri kadar puanı toplam puana ekle   
 def asterTimer(spacerock):
 
     global score
-    #check if asteroid is destroyed
+    # Asteroit yok oldu mu diye kontrol et
     if spacerock.isdestroyed() == True:
-        #get its point value
+       # Puan değerini al
         points = spacerock.getAsteroidpoints()
-        #add points to the score
+        # Puanı skora ekle
         score += points
-        #reset the asteroid
+      # Asteroiti sıfırla
         spacerock.makeinvis()
         
-#create a timer to check if the laser goes off the right side of the screen, every 50ms            
+# Her 50ms'de bir lazerin ekranın sağ tarafına çıkıp çıkmadığını kontrol eden bir zamanlayıcı oluştur
+           
 def bulletTimer():
     global bullettmrid
     if B.getX() > canvas.winfo_width():
@@ -162,11 +161,12 @@ def bulletTimer():
 
     bullettmrid = root.after(50, bulletTimer)
 
-#create a timer to animate the background, and call it every 50ms
+# Arka planı animasyon yapmak için bir zamanlayıcı oluştur ve her 50ms'de bir çağır
+
 def background_timer():
     global btid
     
-    #cycle through the list of frames
+   # Çerçeve listesini döngüye al
     for i in range(len(background_list)):
         canvas.coords(background_list[i], xpos[i] - 5, 0)
         xpos[i] -= 5
@@ -179,32 +179,32 @@ def background_timer():
     if xpos[1] + imgBackground.width() <= 0:
         xpos[1] = xpos[0] + imgBackground.width()
 
-#create a timer to check collision every 1ms
+# Her 1ms'de bir çarpışmayı kontrol etmek için bir zamanlayıcı oluştur
 def Collisionchk():
     global collisionid
     
-    #go through each asteroid and check if the player is touching the asteroid
+    
     for x in range(len(asteroids)):
-        #check if the asteroid is destroyed, if so skip the rest
+        
         if asteroids[x].isdestroyed() == True:
             pass
         else:
-            #check that the player and asteroid overlap, if they do take a life from the player
+           
             if P.getX() + P.getWidth() - 10 >= asteroids[x].getxPos() and P.getX() <= asteroids[x].getxPos() + asteroids[x].getWidth() and asteroids[x].isdestroyed() == False:
                 if P.getY() + P.getHeight() >= asteroids[x].getyPos() and P.getY() <= asteroids[x].getyPos() + asteroids[x].getHeight():
-                    #set the health of the player to 1
+                   
                     P.setHealth(1)
-                    #take that 1hp away
+                   
                     P.takeDamage()
-                    #play sound effect
+                   
                     playexplosioneffect()
-                    #check the lives left
+                   
                     playerlives()
                     break
                 
-    #check if the laser has been fired
+   
     if B.isFired() == True:
-        #go through all the asteroids and check if the laser overlaps any of them, if it does, reset the laser and make the asteroid take damage
+       
         for x in range(len(asteroids)):
             if asteroids[x].getxPos() + asteroids[x].getWidth() - 10 >= B.getX() and asteroids[x].getxPos() <= B.getX() + B.getWidth() and asteroids[x].isdestroyed() == False:
                 if asteroids[x].getyPos() + asteroids[x].getHeight() >= B.getY() and asteroids[x].getyPos() <= B.getY() + B.getHeight():
@@ -218,20 +218,22 @@ def Collisionchk():
                 
     collisionid = root.after(1, Collisionchk)
 
-#create a function that will check if any asteroids hit the left wall
+# Herhangi bir asteroit sol duvara çarptı mı diye kontrol eden bir fonksiyon oluştur
+
 def AsterWallchk():    
-    #if there are no asteroids skip the code
+   
     if len(asteroids) == 0:
         pass
     else:
-        #go through all asteroids and check if they are passed the left wall, if yes, the player takes damage 
+        # Tüm asteroitleri kontrol et ve sol duvarı geçip geçmediklerini kontrol et, eğer geçtilerse oyuncu hasar alır
+
         for x in range(len(asteroids)):
             if asteroids[x].getxPos() + asteroids[x].getWidth() <= 0 and  asteroids[x].isdestroyed() == False:
-                #destroy the asteroid, and offset it
+                
                 asteroids[x].destroy()
                 asteroids[x].makeinvis()
                 
-                #make the player take damage and check lives
+               
                 P.takeDamage()
                 playerlives()               
                 break
@@ -239,18 +241,18 @@ def AsterWallchk():
             
                     
 ySpawnPos = 0
-#create a function to check whether an asteroid can spawn on a specific y-axis value
+# Bir asteroitin belirli bir y ekseni değeriyle doğup doğamayacağını kontrol eden bir fonksiyon oluştur
 def checkspawn(A):
     global asteroids
     global ySpawnPos
     
-    #go through the asteroids and check whether the newest asteroids spawn overlaps any of them
+  # Asteroitleri kontrol et ve en yeni asteroitin, diğerleriyle örtüşüp örtüşmediğini kontrol et
     for x in range(len(asteroids)):
-        #if this asteroid isnt overlapping with the right wall go to the next one
+       # Eğer bu asteroit sağ duvarla örtüşmüyorsa, bir sonrakine geç
         if asteroids[x].getxPos() + asteroids[x].getWidth() <= canvas.winfo_reqwidth():
             pass
         else:
-            #get the hitbox of this asteroid
+           
             ytop = asteroids[x].getyPos()
             ybot = asteroids[x].getHeight()
             xL = asteroids[x].getxPos()
@@ -259,17 +261,17 @@ def checkspawn(A):
             ySpawnPos = A.genYSpawn(y1 = ytop, y2 = ybot,x1= xL,x2= xR)
             return ySpawnPos
     
-    #get a y value that is spawnable
+   
     ySpawnPos = A.genYSpawn()
                 
     return ySpawnPos
         
-#set base difficulty stats    
+   
 asteroid_spawn_rate = 2000
 asteroid_speed = 100
 difficulty = 0
 
-#create a timer that creates an asteroid, according to the spawn rate (2000ms)
+
 def create_Asteroid():
     global asterspawntmrid
     global asteroid_spawn_rate
@@ -280,7 +282,7 @@ def create_Asteroid():
     
     
     
-    #check difficulty and make the game more difficult by increasing how fast asteroids move
+   
     if difficulty == 2 and asteroid_speed != 40:
         asteroid_speed -= 30
         difficulty = 0
@@ -288,107 +290,105 @@ def create_Asteroid():
         asteroid_speed -= 10
         difficulty = 0
        
-    #check if there is less than 10 asteroids made  
+    
     if len(asteroids) < 10:
-        #make a new asteroid object
+       
         A = Asteroid(canvas, imgTitle)
-        #generate the asteroids stats
+       
         A.Generate()
         
-        #if it is the first asteroid created spawn it anywhere on the y axis
+      
         if len(asteroids) == 0:
             A.genYSpawn()
         else:
-            #check if you can spawn it on the y axis
+            
             checkspawn(A)
-        #make the image visible    
+          
         A.SpawnAsteroid()
-        #set speed
+       
         A.setSpeed(asteroid_speed)
-        #start movin the asteroid
+        
         A.moveAsteroid()
-        #add the object to the list
+        
         asteroids.append(A)
    
     elif len(asteroids) == 10:
-        #if 10 asteroid objects are already made
-        #go through them all and check if the next wave of 10 can spawn
+       # Eğer 10 asteroit nesnesi zaten oluşturulmuşsa
+# Hepsini kontrol et ve bir sonraki dalganın 10 asteroiti doğup doğamayacağını kontrol et
         for y in range(len(asteroids)):
-            #if all asteroids are destroyed then spawn the next wave otherwise dont spawn the next wave
+           # Eğer tüm asteroitler yok edildiyse, bir sonraki dalgayı doğur; aksi takdirde bir sonraki dalgayı doğurma
             if asteroids[y].isdestroyed() == True:
                 canspawn = True
             else:
                 canspawn = False
                 break
         
-        #if the new wave can spawn show text saying that a wave is approaching    
+          
         if canspawn == True:
             canvas.itemconfig(text, text = "New Wave Approaching!")
-            #increase difficulty
+           
             difficulty +=1
         
-        #if a new wave can spawn re-create the asteroids
+       
         if canspawn == True:  
             
-            #create a setback so they dont overlap
+            
             setback = canvas.winfo_reqwidth()
             for x in range(len(asteroids)):
-                #go through all asteroids and make them not destroyed
+                
                 asteroids[x].undestroy()
-                #create new stats for the asteroid
+               
                 asteroids[x].Generate()
-                #check if the asteroid can spawn there
+               
                 checkspawn(asteroids[x])
-                #add to the set back
+               
                 setback += asteroids[x].getWidth()
-                #apply the setback
+               
                 asteroids[x].setxPos(setback + 100)
-                #make the asteroid visible
+                
                 asteroids[x].SpawnAsteroid()
-                #set the speed of the asteroid
+                
                 asteroids[x].setSpeed(asteroid_speed)
-                #move the asteroid
+                
                 asteroids[x].moveAsteroid()
                 
-        #if the first asteroid passes the right wall remove the text on screen      
+             
         if asteroids[0].getxPos() <= canvas.winfo_reqwidth():
             canvas.itemconfig(text, text = "")
                 
                 
            
-    #call to check if an asteroid hits a wall            
+                
     AsterWallchk()
     asterspawntmrid = root.after(asteroid_spawn_rate, create_Asteroid)
     
-#create a function that shoots a laser on a key press               
+             
 def onkeypress(event):
     global bullx
     global bully
-    #if the space bar is pressed shoot the laser
+   
     if event.keysym == 'space' and B.isFired() == False:
-        #set the location of the laser infront of the player
+       
         B.setLocation(bullx + P.getWidth() - 10 , bully + P.getHeight() // 2 - 10)
         
-        #play sound effect
+       
         playlasereffect()
-        #fire the laser
+        
         B.fireBullet()
-        #check if it hits right wall
+       
         bulletTimer()
         
         
 bullx = 0
 bully = 0
-#create a function that moves the player on mouse movement
+
 def onmousemove(event):
     global bullx
     global bully
-    
-    #get the x and y of the mouse, positioned at the center of the ship 
     x = event.x - P.getWidth() // 2
     y = event.y - P.getHeight() // 2
     
-    #set screen boundaries, and where the player ship should be if the mouse goes past the boundaries 
+   # Ekran sınırlarını belirle ve eğer fare sınırları geçerse oyuncu gemisinin nerede olması gerektiğini ayarla
     if x <= 0:
         x = 0
     elif x + P.getWidth() >= canvas.winfo_width():
@@ -400,31 +400,23 @@ def onmousemove(event):
     elif y + P.getHeight() >= canvas.winfo_height():
         y = canvas.winfo_height() - P.getHeight() - 5
     
-    #set the location of the player ship, on the mouse
+   # Oyuncu gemisinin konumunu, fareye göre ayarla
     P.setLocation(x,y)
     
     bullx = x + 10
     bully = y
-
-
-    
-    
-        
-    
-    
-
 root = Tk()
 root.title('Asterpocalypse')
 root.protocol('WM_DELETE_WINDOW', exit_program)
-#bind the keyboard and mouse to functions
+
 root.bind('<KeyPress>', onkeypress)
 root.bind('<Motion>', onmousemove)
 
-#set a background
+
 imgBackground = PhotoImage(file='images/space_background.png')
 imgTitle = PhotoImage(file='images/asterpocalypse.png')
 
-#center the window
+
 root.geometry("%dx%d+%d+%d" % (imgBackground.width(), imgBackground.height(), root.winfo_screenwidth() // 2 - imgBackground.width() // 2,
     root.winfo_screenheight() // 2 - imgBackground.height() // 2))
 
@@ -434,7 +426,7 @@ canvas.pack()
 background_list = [0] * 2
 xpos = [0, imgBackground.width()]
 
-#create the background frames
+
 for i in range(len(background_list)):
     background_list[i] = canvas.create_image(xpos[i], 0, image=imgBackground, anchor='nw')
 
@@ -447,7 +439,7 @@ text = canvas.create_text(canvas.winfo_reqwidth() //2 , canvas.winfo_reqheight()
 
 
 asteroids = []
-#initialize player and laser(bullet) objects
+# Oyuncu ve lazer (mercek) nesnelerini başlat
 B = Bullet(canvas)
 P = Player(canvas, y = 0 + imgTitle.height())
 
