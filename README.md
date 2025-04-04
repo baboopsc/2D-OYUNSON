@@ -124,3 +124,96 @@ asteroid.SpawnAsteroid()
 asteroid.moveAsteroid()
 
 root.mainloop()
+# Asterpocalypse - Bullet Sınıfı Raporu
+
+## Genel Bakış
+
+**Bullet Sınıfı**, oyundaki mermileri temsil eder. Bu sınıf, merminin konumunu, ateşlenip ateşlenmediğini, hareketini ve resetlenmesini yönetir. Mermi, bir resim ile temsil edilir ve ekranda hareket ettirilir. Sınıf, merminin hareketinin kontrolü için bir zamanlayıcı (timer) kullanır.
+
+---
+
+## Temel Özellikler
+
+- **X ve Y Değerleri:**
+    - Merminin ekran üzerindeki konumunu belirler. `__x` ve `__y` olarak saklanır.
+    
+    ![Bullet X ve Y](images/bullet_position_example.png)
+
+- **Görseller:**
+    - Merminin görseli **laserbeam_red.png** olarak belirlenmiştir.
+      ![Laser Beam](images/laserbeam_red.png)
+    - Boş bir görsel **blank.png** de reset işlemleri için kullanılır.
+      ![Blank](images/blank.png)
+
+- **Genel Durum:**
+    - **__fired:** Merminin ateşlenip ateşlenmediğini kontrol eder.
+    - **__timerid:** Merminin hareketini yöneten zamanlayıcının kimliği.
+    - **__canvas:** Merminin yer alacağı tkinter canvas penceresi.
+
+- **Mermi Boyutları:**
+    - Merminin genişliği (`__width`) ve yüksekliği (`__height`), görselin boyutlarından alınır.
+    
+    ![Bullet Size](images/bullet_size_example.png)
+
+---
+
+## Sınıfın Metodları
+
+### 1. `getX(self)`
+   - Merminin mevcut x koordinatını döndürür.
+
+### 2. `getY(self)`
+   - Merminin mevcut y koordinatını döndürür.
+
+### 3. `setX(self, x)`
+   - Merminin x koordinatını ayarlar.
+
+### 4. `setY(self, y)`
+   - Merminin y koordinatını ayarlar.
+
+### 5. `setLocation(self, x, y)`
+   - Merminin konumunu hem x hem de y eksenlerinde ayarlar.
+
+    ![Set Location](images/set_location_example.png)
+
+### 6. `fireBullet(self)`
+   - Mermiyi ateşler ve ileriye hareket ettirir. Hareket için bir zamanlayıcı kullanılır.
+
+   ![Fire Bullet](images/fire_bullet_example.png)
+
+### 7. `isFired(self)`
+   - Merminin ateşlenip ateşlenmediğini kontrol eder ve Boolean (True/False) değerini döndürür.
+
+### 8. `reset(self)`
+   - Merminin hareketini durdurur, görseli boş bir resimle değiştirir ve zamanlayıcıyı iptal eder.
+
+   ![Reset Bullet](images/reset_bullet_example.png)
+
+### 9. `getWidth(self)`
+   - Merminin genişliğini döndürür.
+
+### 10. `getHeight(self)`
+   - Merminin yüksekliğini döndürür.
+
+---
+
+## Örnek Kod
+
+Aşağıda **Bullet** sınıfının nasıl kullanılabileceğine dair bir örnek verilmiştir:
+
+```python
+from tkinter import Tk, Canvas
+from bullet import Bullet
+
+# Ana pencereyi oluştur
+root = Tk()
+canvas = Canvas(root, width=800, height=600)
+canvas.pack()
+
+# Mermi objesi oluştur
+bullet = Bullet(canvas)
+
+# Mermiyi ateşle
+bullet.fireBullet()
+
+root.mainloop()
