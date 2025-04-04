@@ -106,26 +106,7 @@ Aşağıdaki görseller `images` klasöründen alınmıştır:
 
 ## Örnek Kod
 
-Aşağıda, **Asteroid** sınıfının nasıl kullanılabileceğine dair bir örnek verilmiştir:
-
-```python
-from tkinter import Tk, Canvas
-from asteroid import Asteroid
-
-# Ana pencereyi oluştur
-root = Tk()
-canvas = Canvas(root, width=800, height=600)
-canvas.pack()
-
-# Asteroit objesi oluştur
-asteroid = Asteroid(canvas, 100)
-asteroid.Generate()
-asteroid.SpawnAsteroid()
-asteroid.moveAsteroid()
-
-root.mainloop() 
-f)`
-   - Mermiyi ateşler ve # Asterpocalypse - Bullet Sınıfı Raporu
+ # Asterpocalypse - Bullet Sınıfı Raporu
 
 ## Genel Bakış
 
