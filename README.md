@@ -1,6 +1,6 @@
 #  Asterpocalypse
 
-**Ali Muhsin Mışraklı & Okan Karahan**  
+**Ali Muhsin Mışraklı 23253007 & Okan Karahan 23253035 **  
 📅 *01/04/2025*
 
 ---
