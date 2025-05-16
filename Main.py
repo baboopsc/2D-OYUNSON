@@ -14,8 +14,8 @@ import pygame
 pygame.mixer.init()
 
 # Arka plan şarkısını yükle ve tekrar çal
-pygame.mixer.music.load("15 MilkyWay (Battle).mp3")
-pygame.mixer.music.set_volume(.5)
+pygame.mixer.music.load("Ferdi Özbeğen - Dönsen Bile (Slowed~Reverb).mp3")
+pygame.mixer.music.set_volume(1)
 pygame.mixer.music.play(loops=-1)
 
 # Bir ses efekti çalmak için bir fonksiyon oluştur
@@ -414,7 +414,7 @@ root.bind('<Motion>', onmousemove)
 
 
 imgBackground = PhotoImage(file='images/space_background.png')
-imgTitle = PhotoImage(file='images/asterpocalypse.png')
+imgTitle = PhotoImage(file='images/a.png')
 
 
 root.geometry("%dx%d+%d+%d" % (imgBackground.width(), imgBackground.height(), root.winfo_screenwidth() // 2 - imgBackground.width() // 2,
