@@ -120,7 +120,7 @@ class Asteroid:
                    minimum y değeri
 
                '''
-        self.__imgAsteroid = [PhotoImage(file = "images/asteroid0.png"), PhotoImage(file = "images/asteroid1.png"), PhotoImage(file = "images/asteroid2.png"), PhotoImage(file = "images/explosion0.png"), PhotoImage(file = "images/blank.png")]
+        self.__imgAsteroid = [PhotoImage(file = "images/1.png"), PhotoImage(file = "images/22.png"), PhotoImage(file = "images/Tung-Tung-Tung.png"), PhotoImage(file = "images/explosion0.png"), PhotoImage(file = "images/blank.png")]
         self.__Points = [10,20,30]
         self.__Hitpoints = [1,2,3]
         self.__Canvas = canvasarg
