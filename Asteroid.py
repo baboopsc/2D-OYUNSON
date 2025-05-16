@@ -131,7 +131,7 @@ class Asteroid:
         self.__destroyed = False
         self.__asteroidimg = None
         self.__timerId = None
-        self.__asteroidspeed = 20
+        self.__asteroidspeed = 40
        
     def SpawnAsteroid(self):
         '''
