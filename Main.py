@@ -325,7 +325,7 @@ def create_Asteroid():
         
           
         if canspawn == True:
-            canvas.itemconfig(text, text = "New Wave Approaching!")
+            canvas.itemconfig(text, text = "yeni DALGA geliyoooor!")
            
             difficulty +=1
         
