@@ -1,6 +1,6 @@
 #// ALİ MUHSİN MIŞRAKLI 
 #//OKAN KARAHAN
-#//Asterpocalypse Program
+#//Pamukkale Program
 #//01/04/2025
     
 # Gerekli tüm sınıfları içeri aktar
@@ -118,7 +118,7 @@ def playerlives():
         pausetimers()
         P.reset()
         reset(False)
-        flag = messagebox.askyesno("Asterpocalypse", "You had " + str(score) + " Points\nYou are out of lives would you like to play again?")
+        flag = messagebox.askyesno("Pamukkale", "Sen " + str(score) + " puan yaptın\n Bir daha oynamak ister misin ?")
        # Oyunu tamamen sıfırla
         reset()
        # Oyuncu konumunu sıfırla
@@ -134,7 +134,7 @@ def playerlives():
         pausetimers()
         P.resethealth()
         reset(False)
-        messagebox.showinfo("Asterpocalypse", "You lost a life")
+        messagebox.showinfo("Pamukkale", "Canın gitti")
         P.resetlocation()
         
         pausetimers(False)    
@@ -406,7 +406,7 @@ def onmousemove(event):
     bullx = x + 10
     bully = y
 root = Tk()
-root.title('Asterpocalypse')
+root.title('Pamukkale')
 root.protocol('WM_DELETE_WINDOW', exit_program)
 
 root.bind('<KeyPress>', onkeypress)
