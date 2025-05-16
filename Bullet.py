@@ -1,57 +1,14 @@
 from tkinter import PhotoImage
 
 class Bullet:
-   '''
-    Bir mermiyi temsil etmek için kullanılan bir sınıf
-
-    Özellikler
-    ----------
-    __x:int
-        merminin x değeri
-    __y:int
-        merminin y değeri
-    __width:int
-        merminin genişliği
-    __height:int
-        merminin yüksekliği
-    __fired:boolean
-        mermi ateşlendi mi
-    __timerid:none
-        zamanlayıcı
-    __canvas : tkinter modülü
-        bu merminin yer alacağı pencere
-
-    Yöntemler
-    -------
-    getX(self):
-        mevcut x değerini alır
-    getY(self):
-        mevcut y değerini alır
-    setX(self, x):
-        yeni x değerini ayarlar
-    setY(self, y):
-        yeni y değerini ayarlar
-    setLocation(self, x, y):
-        merminin yerini x ve y eksenlerinde ayarlar
-    fireBullet(self):
-        mermiyi ateşler ve ileriye hareket ettirir
-    isFired(self):
-        merminin ateşlenip ateşlenmediğini döndürür
-    reset(self):
-        merminin hareketini durdurur, zamanlayıcıyı durdurarak
-    getWidth(self):
-        merminin genişliğini piksel cinsinden alır
-    getHeight(self):
-        merminin yüksekliğini piksel cinsinden alır
-'''
-
+  
     def __init__(self, canvasarg):
-       '''
-        PARAMETRELER:
+        '''
+        PARAMETERS:
         -----------
-        canvas : tkinter modülü
-            bu merminin yer alacağı pencere
-'''
+        canvas : tkinter module
+            the window in which this bullet will be located
+        '''
         self.__canvas = canvasarg
         self.__x = 0
         self.__y = 0
@@ -67,35 +24,63 @@ class Bullet:
         self.__imgBullet = self.__canvas.create_image(self.__x - self.__img_bullet.width(), self.__y - self.__img_bullet.height(), image = self.__img_bullet, anchor='nw')
     
     def getX(self):
-      '''
-        Merminin x değerini döndürür.
-        DÖNDÜRÜR:
+        '''
+        Returns the x value of the bullet.
+        RETURNS:
         --------
         int
-            Merminin x değeri
-'''
+            The x value of the bullet
+        '''
         return self.__x
     
     def getY(self):
-        
+        '''
+        Returns the y value of the bullet.
+        RETURNS:
+        --------
+        int
+            The y value of the bullet
+        '''
         return self.__y
     
     def setX(self, x):
-       
+        '''
+        Sets the x value of the bullet
+        PARAMETERS:
+        -----------
+        x: int
+            The new x value of the bullet
+        '''
         self.__x = x
     
     def setY(self, y):
-      
+        '''
+        Sets the y value of the bullet
+        PARAMETERS:
+        -----------
+        y: int
+            The new y value of the bullet
+        '''
         self.__y = y
     
     def setLocation(self, x, y):
-       
+        '''
+        Sets the x & y values of the bullet
+        PARAMETERS:
+        -----------
+        x: int
+            The new x value of the bullet
+        y:int
+            the new y value of the bullet
+        '''
         self.__x = x
         self.__y = y
         self.__canvas.coords(self.__imgBullet, self.__x, self.__y)
     
     def fireBullet(self):
-       
+        '''
+        fires the bullet and moves it forward 5 pixels every 5ms
+        '''
         self.__fired = True
         self.__x += 5
         self.__canvas.itemconfig(self.__imgBullet, image = self.__img_bullet)
@@ -103,10 +88,19 @@ class Bullet:
         self.__timerid = self.__canvas.after(5, self.fireBullet)
     
     def isFired(self):
-       
+        '''
+        Returns if the bullet is fired
+        RETURNS:
+        --------
+        boolean
+            The state of the bullet
+        '''
         return self.__fired
     
     def reset(self):
+        '''
+        stops the bullet from moving, by stopping the timer
+        '''
         self.__canvas.itemconfig(self.__imgBullet, image = self.__imgBlank)
         try:
             self.__timerid = self.__canvas.after_cancel(self.__timerid)
@@ -115,42 +109,55 @@ class Bullet:
             pass
     
     def getWidth(self):
-        
+        '''
+        Returns the width of the bullet.
+        RETURNS:
+        --------
+        int
+            The  width of the bullet in pixels
+        '''
         return self.__width
     
     def getHeight(self):
+        '''
+        Returns the height of the bullet.
+        RETURNS:
+        --------
+        int
+            The height of the bullet in pixels
+        '''
         return self.__height
     
     
     
     
     
-   '''
-        alltxt.count("'") kadar döngü çalıştır:
+    '''
+        for x in range(alltxt.count("'")):
             
-            Eğer sayaç % 2 == 0 ise:
+            if counter % 2 == 0:
                 pos = self.text.search("'", pos, "end")
                 pos = "{} + {} chars".format(pos,1)
                 
-                Eğer flag False ise ve x, alltxt.count("'") - 1'e eşitse:
+                if flag == False and x == alltxt.count("'") -1:
                     pos_end = self.text.search("'", pos, "end")
                     pos_end = "{} + {} chars".format(pos_end,1)
                     pos = "{} - {} chars".format(pos,1)
                     self.text.tag_add(tag,pos,pos_end)
                     flag = True
                 
-            Aksi takdirde:
+            else:
                 pos_end = self.text.search("'", pos, "end")
                 print(pos_end)
-                Eğer self.text.compare(self.text.search("'", pos, "end"), '>' , self.text.search('\n', pos, 'end')) == True:
+                if self.text.compare(self.text.search("'", pos, "end"), '>' , self.text.search('\n', pos, 'end')) == True:
                     pos = pos_end
                     flag = False
                     
-                Aksi takdirde:
+                else:
                     pos_end = "{} + {} chars".format(pos_end,1)
                     pos = "{} - {} chars".format(pos,1)
                     self.text.tag_add(tag,pos,pos_end)
                       
                 pos = "{}".format(pos_end)
-            sayaç += 1   
-'''
+            counter += 1   
+            '''
