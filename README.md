@@ -1,5 +1,4 @@
-#  Asterpocalypse
-
+#  Pamukkale
 **Ali Muhsin Mışraklı 23253007 & Okan Karahan 23253035 **  
 📅 *01/04/2025*
 
@@ -7,7 +6,7 @@
 
 ##  Oyun Tanıtımı
 
-**Asterpocalypse**, oyuncunun bir uzay gemisini kontrol ederek ekrana doğru gelen asteroidleri yok etmeye çalıştığı 2D bir uzay oyunudur.  
+**Pamukkale**, oyuncunun bir uzay gemisini kontrol ederek ekrana doğru gelen varlıkları yok etmeye çalıştığı 2D bir uzay oyunudur.  
 Pygame ve Tkinter kullanılarak Python diliyle geliştirilmiştir.
 
 ---
@@ -15,7 +14,7 @@ Pygame ve Tkinter kullanılarak Python diliyle geliştirilmiştir.
 ##  Ekran Görüntüleri
 
 ### Ana Arayüz
-![Arka Plan ve Başlık](images/asterpocalypse.png)
+![Arka Plan ve Başlık](images/a.png)
 
 ### Oynanış
 ![Oyun Arka Planı](images/space_background.png)
@@ -39,7 +38,7 @@ Asteroidleri oluşturur, hareket ettirir ve çarpışma sonrası yok edilmesini 
 
 ##  Ses Efektleri
 
-- **Arka Plan Müziği:** `15 MilkyWay (Battle).mp3`  
+- **Arka Plan Müziği:** `Ferdi Özbeğen - Dönsen Bile (Slowed~Reverb).mp3`  
 - **Lazer Atışı:** `064-laser.wav`  
 - **Patlama Efekti:** `explosion.wav`
 
@@ -60,7 +59,7 @@ Asteroidleri oluşturur, hareket ettirir ve çarpışma sonrası yok edilmesini 
 
 ## Yapay Zekâ / Zorluk Sistemi
 
-- Oyun ilerledikçe asteroid hızı artar (`asteroid_speed`)  
+- Oyun ilerledikçe varlık hızı artar (`asteroid_speed`)  
 - Yeni dalga başladığında kullanıcı bilgilendirilir  
 - Oyun zorluğu her yeni dalgada artar
 
@@ -74,7 +73,7 @@ Asteroidleri oluşturur, hareket ettirir ve çarpışma sonrası yok edilmesini 
 ---
 
 
-# Asterpocalypse - Asteroid Sınıfı Raporu
+# Pamukkale - Varlık Sınıfı Raporu
 
 ## Genel Bakış
 
@@ -85,22 +84,22 @@ Asteroidleri oluşturur, hareket ettirir ve çarpışma sonrası yok edilmesini 
 ## Temel Özellikler
 
 - **Puan (Points):**
-    - Her asteroitin farklı puan değerleri vardır: 10, 20, 30.
+    - Her varlığın farklı puan değerleri vardır: 10, 20, 30.
   
 - **Sağlık (Hitpoints):**
-    - Asteroitlerin 3 farklı sağlık değeri bulunur: 1, 2, 3.
+    - Varlıkların 3 farklı sağlık değeri bulunur: 1, 2, 3.
 
 - **Görseller (Images):**
-    - Asteroitlerin görselleri `images/asteroid0.png`, `images/asteroid1.png`, `images/asteroid2.png`, `images/explosion0.png` ve `images/blank.png` gibi dosyalarla temsil edilir.
+    - Varlıkların görselleri `images/1.png`, `images/22.png`, `images/Tung-Tung-Tung.png`, `images/explosion0.png` ve `images/blank.png` gibi dosyalarla temsil edilir.
 
 - **Hız (Speed):**
-    - Asteroitlerin hareket hızı zaman içinde değiştirilebilir. Varsayılan hız 20'dir.
+    - Varlıkların hareket hızı zaman içinde değiştirilebilir. Varsayılan hız 20'dir.
 
 - **Hasar Alma ve Yok Olma:**
-    - Asteroitler hasar aldıkça sağlıkları azalır ve sağlık sıfırlandığında patlar (yok olur).
+    - Varlıklar hasar aldıkça sağlıkları azalır ve sağlık sıfırlandığında patlar (yok olur).
 
 - **Doğma (Spawn) ve Hareket (Movement):**
-    - Asteroitler rastgele yerlerde doğar ve ekranın sağ tarafından sola doğru hareket ederler.
+    - Varlıklar rastgele yerlerde doğar ve ekranın sağ tarafından sola doğru hareket ederler.
 
 ---
 
@@ -172,9 +171,9 @@ Asteroidleri oluşturur, hareket ettirir ve çarpışma sonrası yok edilmesini 
 
 Aşağıdaki görseller `images` klasöründen alınmıştır:
 
-- ![Asteroid 0](images/asteroid0.png)
-- ![Asteroid 1](images/asteroid1.png)
-- ![Asteroid 2](images/asteroid2.png)
+- ![Asteroid 0](images/1.png)
+- ![Asteroid 1](images/22.png)
+- ![Asteroid 2](images/Tung-Tung-Tung.png)
 - ![Explosion](images/explosion0.png)
 - ![Blank](images/blank.png)
 
